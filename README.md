@@ -169,6 +169,24 @@ Our core command center featuring real-time audio-wave recording visualizer, fal
 
 ---
 
+### 📂 Step 4: Comprehensive Task History Explorer
+Allows users to expand previous runs, view exact JSON parameters, see step-by-step agent plans, and verify raw execution outputs from the SQLite relational store in a clean, collapsing vertical accordion list.
+
+<p align="center">
+  <img src="docs/task_history_explorer.png" alt="AURA.AI Task History Explorer" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
+</p>
+
+---
+
+### 🧠 Step 5: Semantic Memory Search Console
+Features real-time interactive search against ChromaDB vectors with calculated cosine similarity ratings for high-speed parameter recovery and workflows context search.
+
+<p align="center">
+  <img src="docs/memory_viewer_console.png" alt="Semantic Memory Viewer Console" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
+</p>
+
+---
+
 ## 🤝 Contribution Guidelines
 
 We welcome community contributions! Please follow these standard steps:
