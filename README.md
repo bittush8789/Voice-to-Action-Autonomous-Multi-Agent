@@ -190,53 +190,6 @@ Features real-time interactive search against ChromaDB vectors with calculated c
 
 ---
 
-## 🛠️ DevOps Core Pillars
-
-### 🐍 1. Python (Core Application)
-The engine is written in **Python 3.11+**, leveraging FastAPI for high-performance sub-second async routing and stateful agent coordination:
-```bash
-# Initialize local server
-python -m uvicorn backend.app:app --reload --host 127.0.0.1 --port 8000
-```
-
----
-
-### 🐳 2. Docker (Containerization)
-Lightweight multi-container architecture isolating tiers for optimal security and stateless scaling:
-- **Backend Image**: `python:3.11-slim` with optimized dependencies.
-- **Frontend Image**: `nginx:alpine` to serve static pages and reverse-proxy API endpoints.
-```bash
-# Build production images
-docker build -t bittush8789/aura-backend:latest -f backend/Dockerfile .
-docker build -t bittush8789/aura-frontend:latest -f frontend/Dockerfile .
-```
-
----
-
-### ☸️ 3. Kubernetes / K8s (Cluster Orchestration)
-Declarative resources supporting local and cloud clusters (**Minikube**, **Kind**, **EKS**, **GKE**):
-```bash
-# Deploy core cluster resources
-kubectl apply -f k8s/namespace.yaml
-kubectl apply -f k8s/configmap.yaml
-kubectl apply -f k8s/secrets.yaml
-kubectl apply -f k8s/pvc.yaml
-kubectl apply -f k8s/backend-deployment.yaml
-kubectl apply -f k8s/backend-service.yaml
-kubectl apply -f k8s/frontend-deployment.yaml
-kubectl apply -f k8s/frontend-service.yaml
-```
-
----
-
-### 🔄 4. GitHub Actions (Automated CI/CD)
-Full build-to-verify pipeline automated inside `.github/workflows/deploy.yml`:
-- **Verify**: Quality checks on dependencies.
-- **Build**: Compiles lightweight Docker images.
-- **Audit**: Dry-run Kubernetes manifest syntax validations.
-
----
-
 ## 🤝 Contribution Guidelines
 
 We welcome community contributions! Please follow these standard steps:
