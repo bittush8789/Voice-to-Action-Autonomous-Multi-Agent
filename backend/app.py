@@ -165,6 +165,11 @@ async def get_history(limit: int = 50):
         logger.error(f"Error retrieving history: {e}")
         raise HTTPException(status_code=500, detail=str(e))
 
+@app.get("/health")
+async def health_check():
+    """Liveness and readiness check endpoint."""
+    return {"status": "healthy", "service": "Voice-to-Action API"}
+
 # --------------------------------------------------------------------------
 # Frontend static files mounting and rendering
 # --------------------------------------------------------------------------

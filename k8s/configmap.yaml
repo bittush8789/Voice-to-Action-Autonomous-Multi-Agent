@@ -1,0 +1,9 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: aura-config
+  namespace: aura
+data:
+  GROQ_LLM_MODEL: "llama-3.3-70b-versatile"
+  GROQ_WHISPER_MODEL: "whisper-large-v3"
+  CHROMA_DB_PATH: "/app/chroma_db"
