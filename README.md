@@ -78,14 +78,19 @@ graph TD
     SummaryAgent --> Dashboard([Premium Light Glass Dashboard])
 ```
 
-### Supported Integration Tools
+### Supported Integration Tools & Trigger Commands
 - ✉️ **Email Agent**: Dispatches automated structured emails.
+  - *Trigger Command*: `Send email to DevOps team about server deployment status`
 - 💬 **Slack Notifier**: Alerts channels with operational updates.
+  - *Trigger Command*: `Notify team on Slack about final milestone release`
 - 🎫 **Jira Creator**: Registers bugs and tracking tasks.
+  - *Trigger Command*: `Create Jira ticket fix critical database connection timeout bug`
 - 🐙 **GitHub Opener**: Opens repository issues.
+  - *Trigger Command*: `Create GitHub issue in user/repo to update readme documentation`
 - 📅 **Meeting Planner**: Books developer calendar slots.
+  - *Trigger Command*: `Schedule a sprint meeting tomorrow at 10 AM with team`
 - 📊 **Report Synthesizer**: Compiles rich Markdown metrics documents.
-- 🔍 **Search Tool**: Queries online technical documentation.
+  - *Trigger Command*: `Generate report about AI performance trends and database locks`
 
 ---
 
@@ -185,81 +190,50 @@ Features real-time interactive search against ChromaDB vectors with calculated c
 
 ---
 
-## 🐳 Docker & Kubernetes Infrastructure Operations
+## 🛠️ DevOps Core Pillars
 
-### 📦 Multi-Container Dockerization
-Each individual tier of **AURA.AI** is fully containerized inside ultra-lightweight, production-ready images:
-- **Backend Service**: Utilizes `python:3.11-slim` equipped with system build tools for accelerated SQLite/ChromaDB compilation. Exposes FastAPI port `8000`.
-- **Frontend Service**: Uses `nginx:alpine` to serve static dashboards. An Nginx reverse-proxy is configured in `nginx.conf` to dynamically route API requests (e.g. `/execute`, `/transcribe`) to the FastAPI backend, eliminating CORS problems out-of-the-box.
-
----
-
-### ⚙️ Multi-Container Docker Compose Setup
-Run the entire production pipeline locally in a single command. The compose configuration provisions backend, frontend, custom bridge networks, and a persistent ChromaDB volume:
-
-1. **Verify `.env` configuration**:
-   Ensure you have created a `.env` file based on `.env.example`.
-2. **Build and launch containers**:
-   ```bash
-   docker-compose up --build -d
-   ```
-3. **Check live logs**:
-   ```bash
-   docker-compose logs -f
-   ```
-4. **Access the application**:
-   - Live Dashboard: **[http://localhost](http://localhost)** (Port 80 via Nginx)
-   - FastAPI Docs: **[http://localhost:8000/docs](http://localhost:8000/docs)**
+### 🐍 1. Python (Core Application)
+The engine is written in **Python 3.11+**, leveraging FastAPI for high-performance sub-second async routing and stateful agent coordination:
+```bash
+# Initialize local server
+python -m uvicorn backend.app:app --reload --host 127.0.0.1 --port 8000
+```
 
 ---
 
-### ☸️ Kubernetes Cluster Deployment
-A complete suite of declarative manifests is located inside the `k8s/` directory to facilitate deployment on local clusters (**Minikube**, **Kind**, **Docker Desktop**) or cloud setups (**EKS**, **GKE**):
-
-1. **Apply the Namespace, ConfigMap, and Secret**:
-   ```bash
-   kubectl apply -f k8s/namespace.yaml
-   kubectl apply -f k8s/configmap.yaml
-   kubectl apply -f k8s/secrets.yaml
-   ```
-2. **Apply Storage PVC**:
-   ```bash
-   kubectl apply -f k8s/pvc.yaml
-   ```
-3. **Deploy Backend & Frontend Tiers**:
-   ```bash
-   kubectl apply -f k8s/backend-deployment.yaml
-   kubectl apply -f k8s/backend-service.yaml
-   kubectl apply -f k8s/frontend-deployment.yaml
-   kubectl apply -f k8s/frontend-service.yaml
-   ```
-4. **Deploy Ingress (Optional)**:
-   ```bash
-   kubectl apply -f k8s/ingress.yaml
-   ```
-5. **Access the Deployment on Minikube**:
-   ```bash
-   minikube service frontend -n aura
-   ```
+### 🐳 2. Docker (Containerization)
+Lightweight multi-container architecture isolating tiers for optimal security and stateless scaling:
+- **Backend Image**: `python:3.11-slim` with optimized dependencies.
+- **Frontend Image**: `nginx:alpine` to serve static pages and reverse-proxy API endpoints.
+```bash
+# Build production images
+docker build -t bittush8789/aura-backend:latest -f backend/Dockerfile .
+docker build -t bittush8789/aura-frontend:latest -f frontend/Dockerfile .
+```
 
 ---
 
-### 🔄 CI/CD Automation Workflow (GitHub Actions)
-Our fully automated `.github/workflows/deploy.yml` pipeline manages high-frequency builds on every push to `main` branch:
-1. **Testing**: Checks dependency compilation and executes dry-run validation on FastAPI imports.
-2. **Docker Builds**: Builds backend and frontend multi-container images via `docker/build-push-action` using GitHub Actions caching.
-3. **Kubernetes Validation**: Executes dry-run `kubectl apply` commands over all manifest structures, guaranteeing zero syntax regression.
+### ☸️ 3. Kubernetes / K8s (Cluster Orchestration)
+Declarative resources supporting local and cloud clusters (**Minikube**, **Kind**, **EKS**, **GKE**):
+```bash
+# Deploy core cluster resources
+kubectl apply -f k8s/namespace.yaml
+kubectl apply -f k8s/configmap.yaml
+kubectl apply -f k8s/secrets.yaml
+kubectl apply -f k8s/pvc.yaml
+kubectl apply -f k8s/backend-deployment.yaml
+kubectl apply -f k8s/backend-service.yaml
+kubectl apply -f k8s/frontend-deployment.yaml
+kubectl apply -f k8s/frontend-service.yaml
+```
 
 ---
 
-### 🧪 Production-Style Local Testing
-Validate all API routes and UI integrations under simulated cluster conditions:
-1. **Health Verification**:
-   ```bash
-   curl http://localhost:8000/health
-   ```
-2. **Vector DB Persistence Test**:
-   Stop compose via `docker-compose down`, then launch again (`docker-compose up -d`). Verify that previous voice run logs are retained under the relational database and the semantic search context.
+### 🔄 4. GitHub Actions (Automated CI/CD)
+Full build-to-verify pipeline automated inside `.github/workflows/deploy.yml`:
+- **Verify**: Quality checks on dependencies.
+- **Build**: Compiles lightweight Docker images.
+- **Audit**: Dry-run Kubernetes manifest syntax validations.
 
 ---
 
