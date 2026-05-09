@@ -10,7 +10,7 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg" alt="Python Version"/></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg?style=flat&logo=fastapi&logoColor=white" alt="FastAPI"/></a>
   <a href="https://www.langchain.com/"><img src="https://img.shields.io/badge/LangChain-v0.1%2B-3F72AF.svg?style=flat" alt="LangChain"/></a>
-  <a href="https://github.com/microsoft/autogen"><img src="https://img.shields.io/badge/Microsoft%20AutoGen-v0.2.28-F38181.svg" alt="Microsoft AutoGen"/></a>
+  <a href="https://github.com/microsoft/autogen"><img src="https://img.shields.io/badge/Microsoft%20AutoGen-Active-F38181.svg" alt="Microsoft AutoGen"/></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"/></a>
 </p>
 
