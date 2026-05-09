@@ -78,14 +78,19 @@ graph TD
     SummaryAgent --> Dashboard([Premium Light Glass Dashboard])
 ```
 
-### Supported Integration Tools
+### Supported Integration Tools & Trigger Commands
 - ✉️ **Email Agent**: Dispatches automated structured emails.
+  - *Trigger Command*: `Send email to DevOps team about server deployment status`
 - 💬 **Slack Notifier**: Alerts channels with operational updates.
+  - *Trigger Command*: `Notify team on Slack about final milestone release`
 - 🎫 **Jira Creator**: Registers bugs and tracking tasks.
+  - *Trigger Command*: `Create Jira ticket fix critical database connection timeout bug`
 - 🐙 **GitHub Opener**: Opens repository issues.
+  - *Trigger Command*: `Create GitHub issue in user/repo to update readme documentation`
 - 📅 **Meeting Planner**: Books developer calendar slots.
+  - *Trigger Command*: `Schedule a sprint meeting tomorrow at 10 AM with team`
 - 📊 **Report Synthesizer**: Compiles rich Markdown metrics documents.
-- 🔍 **Search Tool**: Queries online technical documentation.
+  - *Trigger Command*: `Generate report about AI performance trends and database locks`
 
 ---
 
