@@ -10,7 +10,7 @@
   <a href="https://www.python.org/"><img src="https://img.shields.io/badge/Python-3.10%20%7C%203.11%20%7C%203.12%20%7C%203.13-blue.svg" alt="Python Version"/></a>
   <a href="https://fastapi.tiangolo.com/"><img src="https://img.shields.io/badge/FastAPI-0.100%2B-009688.svg?style=flat&logo=fastapi&logoColor=white" alt="FastAPI"/></a>
   <a href="https://www.langchain.com/"><img src="https://img.shields.io/badge/LangChain-v0.1%2B-3F72AF.svg?style=flat" alt="LangChain"/></a>
-  <a href="https://github.com/microsoft/autogen"><img src="https://img.shields.io/badge/Microsoft%20AutoGen-v0.2.28-F38181.svg" alt="Microsoft AutoGen"/></a>
+  <a href="https://github.com/microsoft/autogen"><img src="https://img.shields.io/badge/Microsoft%20AutoGen-Active-F38181.svg" alt="Microsoft AutoGen"/></a>
   <a href="https://opensource.org/licenses/MIT"><img src="https://img.shields.io/badge/License-MIT-green.svg" alt="License"/></a>
 </p>
 
@@ -182,6 +182,84 @@ Features real-time interactive search against ChromaDB vectors with calculated c
 <p align="center">
   <img src="docs/memory_viewer_console.png" alt="Semantic Memory Viewer Console" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
 </p>
+
+---
+
+## 🐳 Docker & Kubernetes Infrastructure Operations
+
+### 📦 Multi-Container Dockerization
+Each individual tier of **AURA.AI** is fully containerized inside ultra-lightweight, production-ready images:
+- **Backend Service**: Utilizes `python:3.11-slim` equipped with system build tools for accelerated SQLite/ChromaDB compilation. Exposes FastAPI port `8000`.
+- **Frontend Service**: Uses `nginx:alpine` to serve static dashboards. An Nginx reverse-proxy is configured in `nginx.conf` to dynamically route API requests (e.g. `/execute`, `/transcribe`) to the FastAPI backend, eliminating CORS problems out-of-the-box.
+
+---
+
+### ⚙️ Multi-Container Docker Compose Setup
+Run the entire production pipeline locally in a single command. The compose configuration provisions backend, frontend, custom bridge networks, and a persistent ChromaDB volume:
+
+1. **Verify `.env` configuration**:
+   Ensure you have created a `.env` file based on `.env.example`.
+2. **Build and launch containers**:
+   ```bash
+   docker-compose up --build -d
+   ```
+3. **Check live logs**:
+   ```bash
+   docker-compose logs -f
+   ```
+4. **Access the application**:
+   - Live Dashboard: **[http://localhost](http://localhost)** (Port 80 via Nginx)
+   - FastAPI Docs: **[http://localhost:8000/docs](http://localhost:8000/docs)**
+
+---
+
+### ☸️ Kubernetes Cluster Deployment
+A complete suite of declarative manifests is located inside the `k8s/` directory to facilitate deployment on local clusters (**Minikube**, **Kind**, **Docker Desktop**) or cloud setups (**EKS**, **GKE**):
+
+1. **Apply the Namespace, ConfigMap, and Secret**:
+   ```bash
+   kubectl apply -f k8s/namespace.yaml
+   kubectl apply -f k8s/configmap.yaml
+   kubectl apply -f k8s/secrets.yaml
+   ```
+2. **Apply Storage PVC**:
+   ```bash
+   kubectl apply -f k8s/pvc.yaml
+   ```
+3. **Deploy Backend & Frontend Tiers**:
+   ```bash
+   kubectl apply -f k8s/backend-deployment.yaml
+   kubectl apply -f k8s/backend-service.yaml
+   kubectl apply -f k8s/frontend-deployment.yaml
+   kubectl apply -f k8s/frontend-service.yaml
+   ```
+4. **Deploy Ingress (Optional)**:
+   ```bash
+   kubectl apply -f k8s/ingress.yaml
+   ```
+5. **Access the Deployment on Minikube**:
+   ```bash
+   minikube service frontend -n aura
+   ```
+
+---
+
+### 🔄 CI/CD Automation Workflow (GitHub Actions)
+Our fully automated `.github/workflows/deploy.yml` pipeline manages high-frequency builds on every push to `main` branch:
+1. **Testing**: Checks dependency compilation and executes dry-run validation on FastAPI imports.
+2. **Docker Builds**: Builds backend and frontend multi-container images via `docker/build-push-action` using GitHub Actions caching.
+3. **Kubernetes Validation**: Executes dry-run `kubectl apply` commands over all manifest structures, guaranteeing zero syntax regression.
+
+---
+
+### 🧪 Production-Style Local Testing
+Validate all API routes and UI integrations under simulated cluster conditions:
+1. **Health Verification**:
+   ```bash
+   curl http://localhost:8000/health
+   ```
+2. **Vector DB Persistence Test**:
+   Stop compose via `docker-compose down`, then launch again (`docker-compose up -d`). Verify that previous voice run logs are retained under the relational database and the semantic search context.
 
 ---
 
