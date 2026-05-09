@@ -1,8 +1,6 @@
 # AURA.AI: Enterprise Voice-to-Action Autonomous Multi-Agent Orchestrator
 
-<p align="center">
-  <img src="https://media.licdn.com/dms/image/v2/D5603AQH62lVf6HzTaQ/profile-displayphoto-scale_400_400/B56ZrQmDwuI0Ag-/0/1764436231313?e=1779926400&v=beta&t=asx_ScOluCwG2NnypsiTDYxnZl-wq5XaqEhpm0A0xCE" alt="Developer Avatar" width="120" style="border-radius: 50%; border: 4px solid #0066FF; box-shadow: 0 4px 20px rgba(0, 102, 255, 0.3);"/>
-</p>
+
 
 <p align="center">
   <strong>An Intelligent Cognitive Workflow Engine & Collaborative Multi-Agent Platform</strong>
