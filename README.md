@@ -138,12 +138,34 @@ Visit **[http://127.0.0.1:8000](http://127.0.0.1:8000)** to access the live dash
 
 ---
 
-## 🎨 User Interface Highlights
+## 📸 Step-by-Step UI & Visual Walkthrough
 
-- **Interactive Dashboard**: Modern glassmorphic cards display live agent states, integration tools, and statistics.
-- **Clickable Tool Cards**: Clicking any tool card instantly navigates to the console, prefills an action script, and triggers the orchestrator.
-- **Voice Console**: Real-time microphone audio wave visualizers, falling log streams, and AutoGen live group chat transcripts.
-- **Relational History Explorer**: Expandable historical run records showing raw tool inputs, exact execution schedules, and synthesized outputs.
+Experience a complete visual tour of **AURA.AI**'s enterprise workflow capabilities, designed with a premium light glassmorphism aesthetic:
+
+### 🌟 Step 1: Interactive Dashboard Hub
+The primary portal gives an elegant bird's-eye view of your entire system orchestrator, showing transcribed counts, successful actions, active workflows, and live vector memory vectors. It also offers recommended quick-trigger prompts in a list.
+
+<p align="center">
+  <img src="docs/dashboard_overview.png" alt="AURA.AI Dashboard Overview" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
+</p>
+
+---
+
+### ⚙️ Step 2: Clickable System Tools Grid
+A closer look at the **Integrated System Tools** panel. Every individual tool item is fully interactive. Hovering displays a smooth electric-blue glow transition, and clicking a card instantly redirects the user to the console, prefills an action prompt, and initiates execution.
+
+<p align="center">
+  <img src="docs/integrated_tools.png" alt="Integrated System Tools" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
+</p>
+
+---
+
+### 🎙️ Step 3: Multi-Agent Voice Console
+Our core command center featuring real-time audio-wave recording visualizer, falling multi-agent log streams, a full Microsoft AutoGen inter-agent group chat debate stream, and the beautifully formatted synthesized Markdown output card.
+
+<p align="center">
+  <img src="docs/voice_console.png" alt="Multi-Agent Voice Console" width="90%" style="border-radius: 12px; box-shadow: 0 4px 30px rgba(0,0,0,0.05); border: 1px solid rgba(0,0,0,0.05);"/>
+</p>
 
 ---
 
