@@ -1,0 +1,14 @@
+fastapi
+uvicorn
+pydantic
+langchain
+langchain-core
+langchain-community
+langchain-groq
+langgraph
+pyautogen
+chromadb
+groq
+python-multipart
+requests
+python-dotenv

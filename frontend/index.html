@@ -1,0 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voice-to-Action Autonomous Multi-Agent Assistant</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@300;400;500&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Main Style Sheet -->
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-microphone-lines animate-pulse"></i>
+                </div>
+                <h2>AURA<span>.AI</span></h2>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active" data-target="dashboard">
+                    <i class="fa-solid fa-chart-pie"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-target="voice-console">
+                    <i class="fa-solid fa-wand-magic-sparkles"></i>
+                    <span>Voice Console</span>
+                </a>
+                <a href="#" class="nav-item" data-target="task-history">
+                    <i class="fa-solid fa-clock-rotate-left"></i>
+                    <span>Task History</span>
+                </a>
+                <a href="#" class="nav-item" data-target="memory-viewer">
+                    <i class="fa-solid fa-brain"></i>
+                    <span>Memory Viewer</span>
+                </a>
+            </nav>
+            
+            <div class="system-status">
+                <div class="status-header">
+                    <span>AGENTS ACTIVE</span>
+                    <span class="pulse-dot green"></span>
+                </div>
+                <div class="agent-status-list">
+                    <div class="agent-badge"><span class="badge-dot cyan"></span>Voice Agent</div>
+                    <div class="agent-badge"><span class="badge-dot purple"></span>Intent Agent</div>
+                    <div class="agent-badge"><span class="badge-dot orange"></span>Planning Agent</div>
+                    <div class="agent-badge"><span class="badge-dot pink"></span>Memory Agent</div>
+                    <div class="agent-badge"><span class="badge-dot blue"></span>Tool Agent</div>
+                    <div class="agent-badge"><span class="badge-dot gold"></span>Summary Agent</div>
+                </div>
+            </div>
+            
+            <div class="developer-profile" style="margin-top: 24px; padding-top: 16px; border-top: 1px solid var(--border-light); display: flex; align-items: center; gap: 12px;">
+                <img src="https://media.licdn.com/dms/image/v2/D5603AQH62lVf6HzTaQ/profile-displayphoto-scale_400_400/B56ZrQmDwuI0Ag-/0/1764436231313?e=1779926400&v=beta&t=asx_ScOluCwG2NnypsiTDYxnZl-wq5XaqEhpm0A0xCE" alt="Developer profile" style="width: 42px; height: 42px; border-radius: 50%; border: 2px solid var(--accent-blue); object-fit: cover; box-shadow: 0 0 10px rgba(0,102,255,0.2);">
+                <div class="dev-info" style="display: flex; flex-direction: column;">
+                    <span style="font-size: 0.65rem; font-weight: 700; color: var(--accent-blue); text-transform: uppercase; letter-spacing: 0.5px;">Developed By</span>
+                    <span style="font-size: 0.85rem; font-weight: 600; color: var(--text-main);">Bittu Sharma</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Content Area -->
+        <main class="main-content">
+            <!-- Top Navbar -->
+            <header class="top-nav">
+                <div class="search-bar">
+                    <i class="fa-solid fa-circle-nodes"></i>
+                    <span>Autonomous Agent Orchestration Pipeline</span>
+                </div>
+                <div class="user-profile">
+                    <div class="api-badge">
+                        <i class="fa-solid fa-microchip"></i>
+                        <span>Groq Llama 3</span>
+                    </div>
+                    <div class="profile-avatar">
+                        <img src="https://media.licdn.com/dms/image/v2/D5603AQH62lVf6HzTaQ/profile-displayphoto-scale_400_400/B56ZrQmDwuI0Ag-/0/1764436231313?e=1779926400&v=beta&t=asx_ScOluCwG2NnypsiTDYxnZl-wq5XaqEhpm0A0xCE" alt="User profile">
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Page -->
+            <section id="dashboard" class="page-section active">
+                <div class="welcome-banner">
+                    <div class="banner-text">
+                        <h1>Voice-to-Action Autonomous Hub</h1>
+                        <p>Welcome back! Issue a vocal command to let our agentic group chat orchestrate workflows, trigger external tools, and record memories automatically.</p>
+                    </div>
+                    <button class="btn btn-primary" onclick="switchPage('voice-console')">
+                        <i class="fa-solid fa-microphone"></i> Start Voice Session
+                    </button>
+                </div>
+
+                <!-- Stats grid -->
+                <div class="stats-grid">
+                    <div class="stat-card glass">
+                        <div class="stat-icon cyan"><i class="fa-solid fa-wave-square"></i></div>
+                        <div class="stat-info">
+                            <h3>Voice Transcribed</h3>
+                            <p class="stat-num" id="stat-transcribe-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon purple"><i class="fa-solid fa-bolt"></i></div>
+                        <div class="stat-info">
+                            <h3>Successful Actions</h3>
+                            <p class="stat-num" id="stat-success-count">0</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon orange"><i class="fa-solid fa-microchips"></i></div>
+                        <div class="stat-info">
+                            <h3>Active Workflows</h3>
+                            <p class="stat-num">7 Tools</p>
+                        </div>
+                    </div>
+                    <div class="stat-card glass">
+                        <div class="stat-icon gold"><i class="fa-solid fa-brain"></i></div>
+                        <div class="stat-info">
+                            <h3>ChromaDB Memories</h3>
+                            <p class="stat-num" id="stat-memory-count">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Supported Tools Panel -->
+                <div class="dashboard-grid">
+                    <div class="card glass tools-panel">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-cubes"></i> Integrated System Tools</h3>
+                        </div>
+                        <div class="tools-grid">
+                            <div class="tool-item" onclick="prefillAndRun('Send email to DevOps team about server deployment status')" style="cursor: pointer;">
+                                <i class="fa-solid fa-envelope tool-icon email"></i>
+                                <h4>Email Agent</h4>
+                                <p>Sends automated mail reports</p>
+                            </div>
+                            <div class="tool-item" onclick="prefillAndRun('Notify team on Slack about final milestone release')" style="cursor: pointer;">
+                                <i class="fa-brands fa-slack tool-icon slack"></i>
+                                <h4>Slack Notifier</h4>
+                                <p>Alerts devops channels</p>
+                            </div>
+                            <div class="tool-item" onclick="prefillAndRun('Create Jira ticket fix critical database connection timeout bug')" style="cursor: pointer;">
+                                <i class="fa-brands fa-jira tool-icon jira"></i>
+                                <h4>Jira Creator</h4>
+                                <p>Files bug tickets instantly</p>
+                            </div>
+                            <div class="tool-item" onclick="prefillAndRun('Create GitHub issue in user/repo to update readme documentation')" style="cursor: pointer;">
+                                <i class="fa-brands fa-github tool-icon github"></i>
+                                <h4>GitHub Opener</h4>
+                                <p>Creates repository issues</p>
+                            </div>
+                            <div class="tool-item" onclick="prefillAndRun('Schedule a sprint meeting tomorrow at 10 AM with team')" style="cursor: pointer;">
+                                <i class="fa-solid fa-calendar-days tool-icon calendar"></i>
+                                <h4>Meeting Planner</h4>
+                                <p>Schedules sprint synchups</p>
+                            </div>
+                            <div class="tool-item" onclick="prefillAndRun('Generate report about AI performance trends and database locks')" style="cursor: pointer;">
+                                <i class="fa-solid fa-file-invoice tool-icon report"></i>
+                                <h4>Report Synthesizer</h4>
+                                <p>Compiles markdown summaries</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card glass commands-panel">
+                        <div class="card-header">
+                            <h3><i class="fa-solid fa-comments"></i> Try Saying</h3>
+                        </div>
+                        <div class="suggested-commands">
+                            <div class="command-bubble" onclick="prefillAndRun('Send email to DevOps team about server deployment status')">
+                                <i class="fa-solid fa-microphone"></i> "Send email to DevOps team..."
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Notify team on Slack about final milestone release')">
+                                <i class="fa-solid fa-microphone"></i> "Notify team on Slack..."
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Create Jira ticket fix critical database connection timeout bug')">
+                                <i class="fa-solid fa-microphone"></i> "Create Jira ticket..."
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Schedule a team meeting tomorrow at 10 AM')">
+                                <i class="fa-solid fa-microphone"></i> "Schedule meeting tomorrow..."
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Explain how the LangGraph state orchestration pipeline works in detail')">
+                                <i class="fa-solid fa-wand-magic-sparkles"></i> "Explain how LangGraph works..." <span class="badge-step" style="background: var(--accent-cyan); color: #000; font-weight: bold; margin-left: auto;">Ask Anything</span>
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Tell me a programming joke to make my team laugh')">
+                                <i class="fa-solid fa-face-laugh-beam"></i> "Tell me a programming joke..." <span class="badge-step" style="background: var(--accent-cyan); color: #000; font-weight: bold; margin-left: auto;">Ask Anything</span>
+                            </div>
+                            <div class="command-bubble" onclick="prefillAndRun('Send same report as yesterday')">
+                                <i class="fa-solid fa-rotate-left"></i> "Send same report as yesterday" <span class="badge-mem">Memory Recall</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Voice Console Page -->
+            <section id="voice-console" class="page-section">
+                <div class="console-layout">
+                    <!-- Left console control pane -->
+                    <div class="console-left">
+                        <div class="card glass recorder-card">
+                            <h2>Acoustic Controller</h2>
+                            <p>Press the button to record your command, or type directly into the execution box below.</p>
+                            
+                            <!-- Recording Visualizer -->
+                            <div class="visualizer-container">
+                                <div class="audio-waves" id="audio-waves">
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                    <span></span><span></span><span></span><span></span><span></span>
+                                </div>
+                                <button class="record-btn" id="record-btn">
+                                    <i class="fa-solid fa-microphone"></i>
+                                </button>
+                                <div class="record-timer" id="record-timer">00:00</div>
+                            </div>
+                            
+                            <!-- Text Input fallback -->
+                            <div class="text-input-group">
+                                <input type="text" id="manual-text" placeholder="Type a workflow command (e.g. Send email to devops...)">
+                                <button class="btn btn-primary" id="execute-btn">
+                                    <i class="fa-solid fa-paper-plane"></i> Execute
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- AutoGen Collaboration Group Chat -->
+                        <div class="card glass autogen-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-people-group"></i> AutoGen Collaborative Group Chat</h3>
+                                <span class="badge-autogen">Group Chat</span>
+                            </div>
+                            <div class="autogen-chat-box" id="autogen-chat-box">
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-comments"></i>
+                                    <p>AutoGen debate log will render here once execution starts.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right console logging pane -->
+                    <div class="console-right">
+                        <!-- AI Response / Thinking Animation -->
+                        <div class="card glass response-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-wand-magic-sparkles"></i> Executed Result</h3>
+                                <div class="loading-spinner hidden" id="thinking-spinner">
+                                    <span class="spinner-dot"></span>
+                                    <span class="thinking-text">Agents Collaborating...</span>
+                                </div>
+                            </div>
+                            
+                            <div class="response-content" id="response-content">
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-terminal"></i>
+                                    <p>Waiting for command execution input...</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Step-by-Step Agentic Log -->
+                        <div class="card glass logs-card">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-rectangle-list"></i> Pipeline Workflow Logs</h3>
+                                <span class="logs-indicator success hidden" id="pipeline-status-badge">Success</span>
+                            </div>
+                            <div class="workflow-logs" id="workflow-logs">
+                                <div class="empty-state">
+                                    <i class="fa-solid fa-receipt"></i>
+                                    <p>Detailed step-by-step agent logs will stream here during execution.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Task History Page -->
+            <section id="task-history" class="page-section">
+                <div class="card glass">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-clock-rotate-left"></i> SQLite Workflow History Logs</h2>
+                        <button class="btn btn-secondary" onclick="loadHistory()"><i class="fa-solid fa-rotate"></i> Refresh</button>
+                    </div>
+                    <div class="history-list" id="history-list">
+                        <!-- History elements will be dynamically loaded -->
+                        <div class="empty-state">
+                            <i class="fa-solid fa-folder-open"></i>
+                            <p>No historical runs found. Trigger a voice command to record logs.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Memory Viewer Page -->
+            <section id="memory-viewer" class="page-section">
+                <div class="card glass">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-brain"></i> ChromaDB Semantic Memory Bank</h2>
+                    </div>
+                    
+                    <div class="memory-search-bar">
+                        <input type="text" id="memory-search-input" placeholder="Search semantically across memory bank...">
+                        <button class="btn btn-primary" onclick="searchMemories()">
+                            <i class="fa-solid fa-magnifying-glass"></i> Search Memories
+                        </button>
+                    </div>
+
+                    <div class="memory-list" id="memory-list">
+                        <!-- Memories will be loaded dynamically -->
+                        <div class="empty-state">
+                            <i class="fa-solid fa-database"></i>
+                            <p>Query semantic memories from ChromaDB using the search bar above.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Main Javascript File -->
+    <script src="/static/script.js"></script>
+</body>
+</html>
